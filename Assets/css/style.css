@@ -33,12 +33,16 @@ button:hover {
   max-width: 760px;
 
 }
+
 #text {
   font-weight: normal;
+}
+
+.text{
   text-align: center;
 }
 
-ul{
+ul {
   display: flex;
   justify-content: space-between;
   margin: 0px;
@@ -57,20 +61,21 @@ h2 {
   font-size: xx-large;
   font-family: "Roboto", sans-serif;
 }
-h3{
+
+h3 {
   margin: 0px;
   font-weight: normal;
 }
 
-#scores{
+#scores {
   color: rgb(149, 3, 149);
 }
 
-.footer-text{
+.footer-text {
   border-top: 2px solid rgba(128, 128, 128, 0.486);
   color: rgba(100, 100, 100, 0.641);
   font-weight: normal;
-  font-style:italic;
+  font-style: italic;
   text-align: start;
   padding: 12px 10px;
   margin-top: 40px;
@@ -80,6 +85,7 @@ h3{
   .card {
     width: 80vw;
   }
+
   button {
     font-size: 0.7em;
   }
@@ -90,9 +96,9 @@ h3{
   text-align: left;
 }
 
-.ansBtn{
-  margin:0.6em 0.2em; 
-  width:37%; 
+.ansBtn {
+  margin: 0.6em 0.2em;
+  width: 37%;
   text-align: left;
   line-height: 1.5rem;
   padding: 12px;

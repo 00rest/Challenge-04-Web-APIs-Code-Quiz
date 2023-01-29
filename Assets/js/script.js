@@ -1,4 +1,3 @@
-
 var data = [
   {
     question: 'String values must be enclosed within ______ when being assigned to variables.',
@@ -29,7 +28,7 @@ var data = [
 
 var qCount = 0;
 var timer;
-var finalScore = 35;
+var finalScore = 22;
 var check = '';
 var btnCNT = 1;
 var timerCount;
@@ -43,7 +42,7 @@ document.getElementById('buttons').append(newbtn);
 document.getElementById('startQuiz').addEventListener('click', startTest);
 
 function startTest() {
-  timerCount = 95;
+  timerCount = 2;
   console.log('startTest executed');
   startTimer();
   document.getElementById('startQuiz').remove(); //Removes Start Quiz button
@@ -92,8 +91,6 @@ function startTest() {
     } else { timerCount = 1 };
   };
 
-
-
   function inFun() { //Function populates the question and answers text.
     console.log('qCount ' + qCount);
     document.getElementById('greeting').textContent = data[qCount].question;
@@ -107,9 +104,9 @@ function startTest() {
 }
 
 function allDone() {
-
   document.getElementById('greeting').textContent = 'All done!';
-  document.getElementById('text').textContent = 'Your final score is: ' + finalScore;
+  document.getElementById('text').textContent = 'Your final score is ' + finalScore + '.';
+  document.getElementById('text').removeAttribute('class', 'text');
   btnCNT = 1;
   while (btnCNT < 5) {
     document.getElementById('button' + btnCNT).remove();
