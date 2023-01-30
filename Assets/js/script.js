@@ -28,7 +28,7 @@ var data = [
 
 var qCount = 0;
 var timer;
-var finalScore = 22;
+var finalScore = 23;
 var check = '';
 var btnCNT = 1;
 var timerCount;
@@ -38,11 +38,13 @@ newbtn.innerText = "Start Quiz";
 newbtn.setAttribute('id', 'startQuiz');
 document.getElementById('buttons').append(newbtn);
 
-//document.getElementById('scores2').addEventListener('click', showScores)
+document.getElementById('scores2').addEventListener('click', showScores)
 document.getElementById('startQuiz').addEventListener('click', startTest);
 
+
+
 function startTest() {
-  timerCount = 2;
+  timerCount = 15;
   console.log('startTest executed');
   startTimer();
   document.getElementById('startQuiz').remove(); //Removes Start Quiz button
@@ -104,14 +106,30 @@ function startTest() {
 }
 
 function allDone() {
+  btnCNT = 1;
   document.getElementById('greeting').textContent = 'All done!';
   document.getElementById('text').textContent = 'Your final score is ' + finalScore + '.';
   document.getElementById('text').removeAttribute('class', 'text');
-  btnCNT = 1;
+  document.getElementById('allDone').textContent = 'Enter initials:  ';
   while (btnCNT < 5) {
     document.getElementById('button' + btnCNT).remove();
     btnCNT++;
   }
+  var allDoneInpBox = document.createElement('input');
+  allDoneInpBox.setAttribute('type', 'text');
+  allDoneInpBox.setAttribute('id', 'allDoneInpBox');
+  newbtn = document.createElement('button');
+  newbtn.setAttribute('id', 'allDoneButton');
+  newbtn.setAttribute('class', 'allDoneButton');
+  newbtn.textContent = 'Submit';
+  document.getElementById('allDone').append(allDoneInpBox, newbtn);
+  document.getElementById('allDoneButton').addEventListener('click', function () {
+    var userInitial = document.getElementById('allDoneInpBox').value.trim();
+    console.log(userInitial);
+    localStorage.setItem(userInitial, finalScore);
+    showScores();
+  });
+
 }
 
 function startTimer() {
@@ -124,3 +142,47 @@ function startTimer() {
     }
   }, 1000)
 }
+
+function showScores() {
+  
+  clearInterval(timer);
+  var remove = ['header-ul', 'buttons', 'footer-text', 'text', 'allDone'];
+  for (var i = 0; i < remove.length; i++) {
+    document.getElementById(remove[i]).remove()
+  }
+  document.getElementById('greeting').setAttribute('class', 'greeting');
+  document.getElementById('greeting').textContent = 'High scores';
+  
+  var initials = [];
+  var scores = [];
+  
+  for (var i = 0; i < localStorage.length; i++) {
+    initials = localStorage.key(i);
+    scores = localStorage.getItem(initials);
+    var listItem = document.createElement('li');
+    listItem.setAttribute('class', 'names');
+    listItem.textContent = i+1 + '. ' + initials + ' - ' + scores;
+    document.getElementById('score-list').append(listItem);
+  }
+  var goBack = document.createElement('button');
+  goBack.setAttribute('id', 'goBack');
+  goBack.setAttribute('class', 'allDoneButton');
+  goBack.setAttribute('onclick', 'window.location.reload()');
+  goBack.textContent = 'Go back';
+
+  var clear = document.createElement('button');
+  clear.setAttribute('id', 'clear');
+  clear.setAttribute('class', 'allDoneButton');
+  clear.setAttribute('onclick', 'clrFun()');
+
+  clear.textContent = 'Clear high scores';
+  document.getElementById('scoresBtn').append(goBack, clear);
+
+
+}
+
+function clrFun() {
+  localStorage.clear();
+  document.location.reload();
+  showScores();
+};
